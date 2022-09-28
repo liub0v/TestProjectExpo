@@ -25,7 +25,7 @@ const FeedItemContent = ({ item }: { item: Feed }) => {
       </View>
       <View style={styles.row}>
         <View style={styles.avatarWrapper}>
-          <Image style={[styles.avatar]} source={{ uri: item.user.imageUrl }} />
+          <Image style={styles.avatar} source={{ uri: item.user.imageUrl }} />
         </View>
         <Text
           adjustsFontSizeToFit={true}
@@ -35,7 +35,7 @@ const FeedItemContent = ({ item }: { item: Feed }) => {
           {item.message}
         </Text>
       </View>
-      <View style={[styles.infoTitleWrapper]}>
+      <View style={styles.infoTitleWrapper}>
         <Text
           adjustsFontSizeToFit={true}
           numberOfLines={1}

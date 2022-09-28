@@ -10,7 +10,7 @@ import { INDENT, PLUS_ICON, PLUS_ICON_DARK } from "../utils/constants";
 export const AddButton = ({ onPress }) => {
   const { isDarkMode } = useTheme();
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPress}>
         <Image
           style={styles.button}

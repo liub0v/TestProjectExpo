@@ -8,7 +8,7 @@ export const ProfileDetails = () => {
   const { textColor, tileBackgroundColor } = useStyles();
 
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <View style={[styles.userWrapper, tileBackgroundColor]}>
         <Image source={{ uri: user?.imageUrl }} style={styles.avatar}></Image>
         <Text adjustsFontSizeToFit style={[textColor, styles.nameTitle]}>
@@ -16,7 +16,7 @@ export const ProfileDetails = () => {
         </Text>
       </View>
       <View style={styles.infoWrapper}>
-        <View style={[styles.tileItemWrapper]}>
+        <View style={styles.tileItemWrapper}>
           <Text
             adjustsFontSizeToFit
             style={[textColor, styles.tileTitleMiddle]}
@@ -27,7 +27,7 @@ export const ProfileDetails = () => {
             {`${user?.givenValue}$`}
           </Text>
         </View>
-        <View style={[styles.tileItemWrapper]}>
+        <View style={styles.tileItemWrapper}>
           <Text
             adjustsFontSizeToFit
             style={[textColor, styles.tileTitleMiddle]}

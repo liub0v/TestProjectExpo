@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, FC } from "react";
 import {
   View,
   StyleSheet,
@@ -28,8 +28,19 @@ interface IValidationErrors {
   reward: string;
   message: string;
 }
+interface IValidationProps {
+  reward: number;
+  message: string;
+}
+interface INewRewardModalProps {
+  visible: boolean;
+  onDismiss: () => void;
+}
 
-export const NewRewardModal = ({ visible, onDismiss }) => {
+export const NewRewardModal: FC<INewRewardModalProps> = ({
+  visible,
+  onDismiss,
+}) => {
   const dispatch = useDispatch();
   const { tileBackgroundColor, textColor } = useStyles();
 
@@ -37,7 +48,10 @@ export const NewRewardModal = ({ visible, onDismiss }) => {
   const { recievedValue } = useUser();
   const { users } = useData();
 
-  const validate = ({ message, reward }): IValidationErrors => {
+  const validate = ({
+    message,
+    reward,
+  }: IValidationProps): IValidationErrors => {
     const errors = {} as IValidationErrors;
     if (!reward) {
       errors.reward = "Enter some value, please";
@@ -51,17 +65,20 @@ export const NewRewardModal = ({ visible, onDismiss }) => {
     return errors;
   };
 
-  const onSend = useCallback(({ userId, message, reward }) => {
-    console.log(userId, message, reward);
-    dispatch(
-      addFeed({
-        userId,
-        message,
-        reward,
-      })
-    );
-    onDismiss();
-  }, []);
+  const onSend = useCallback(
+    ({ userId, message, reward }) => {
+      console.log(userId, message, reward);
+      dispatch(
+        addFeed({
+          userId,
+          message,
+          reward,
+        })
+      );
+      onDismiss();
+    },
+    [dispatch, onDismiss]
+  );
 
   return (
     <Modal
