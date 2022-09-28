@@ -16,5 +16,5 @@ export const useQuery = () => {
     dispatch(setUsers(users));
     const myRewards = getMyRewards(currentUser.id);
     dispatch(setMyRewards(myRewards));
-  }, [dispatch, setUser, setFeeds, setUsers, getMyRewards, setMyRewards]);
+  }, [currentUser, dispatch, feeds, users]);
 };

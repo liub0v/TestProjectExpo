@@ -1,5 +1,11 @@
 import { NewRewardModal } from "./NewRewardModal";
-import { createContext, useCallback, useMemo, useState } from "react";
+import {
+  createContext,
+  ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 
 export interface IBaseModalDialogContext {
   show: () => void;
@@ -11,7 +17,7 @@ export const ModalContext = createContext<IBaseModalDialogContext>({
   dismiss: () => 0,
 });
 
-export const ModalProvider = ({ children }) => {
+export const ModalProvider = ({ children }: { children: ReactElement }) => {
   const [visible, setVisible] = useState(false);
 
   const dismiss = useCallback(() => {
@@ -29,7 +35,7 @@ export const ModalProvider = ({ children }) => {
         }
       },
     }),
-    []
+    [visible]
   );
   return (
     <ModalContext.Provider value={value}>

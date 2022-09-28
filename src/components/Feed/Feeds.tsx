@@ -28,16 +28,16 @@ export const Feeds = () => {
   };
 
   return (
-    <View style={[styles.container]}>
-      <View style={[styles.headerTabContainer]}>
-        <View style={[styles.headerTabWrapper]}>
+    <View style={styles.container}>
+      <View style={styles.headerTabContainer}>
+        <View style={styles.headerTabWrapper}>
           <TouchableWithoutFeedback onPress={onPressFeeds}>
-            <View style={[styles.headerTab]}>
+            <View style={styles.headerTab}>
               <Text style={[textColor, styles.tabTitle]}> FEEDS</Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={onPressRewards}>
-            <View style={[styles.headerTab]}>
+            <View style={styles.headerTab}>
               <Text style={[textColor, styles.tabTitle]}> MY REWARDS</Text>
             </View>
           </TouchableWithoutFeedback>
