@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import {
   View,
   StyleSheet,
@@ -13,7 +13,7 @@ interface IAddButton {
   onPress: () => void;
 }
 
-export const AddButton: FC<IAddButton> = ({ onPress }) => {
+export const AddButton: FC<IAddButton> = ({ onPress }): ReactElement => {
   const { isDarkMode } = useTheme();
   const { backgroundColor } = useStyles();
   return (

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import {
   StyleSheet,
   View,
@@ -15,7 +15,7 @@ import { useUser } from "../../hooks/useUser";
 import { DEVICE_WIDTH, INDENT, PRIMARY } from "../../utils/constants";
 import { FeedItem } from "./FeedItem";
 
-export const Feeds: FC = () => {
+export const Feeds: FC = (): ReactElement => {
   const { myRewards } = useUser();
   const { feeds } = useData();
   const { textColor } = useStyles();

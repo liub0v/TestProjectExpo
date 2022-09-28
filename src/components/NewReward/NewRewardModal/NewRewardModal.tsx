@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC } from "react";
+import React, { useCallback, useState, FC, ReactElement } from "react";
 import {
   View,
   StyleSheet,
@@ -37,7 +37,10 @@ interface INewRewardModal {
   onDismiss: () => void;
 }
 
-export const NewRewardModal: FC<INewRewardModal> = ({ visible, onDismiss }) => {
+export const NewRewardModal: FC<INewRewardModal> = ({
+  visible,
+  onDismiss,
+}): ReactElement => {
   const dispatch = useDispatch();
   const { tileBackgroundColor, textColor } = useStyles();
   const { users } = useData();

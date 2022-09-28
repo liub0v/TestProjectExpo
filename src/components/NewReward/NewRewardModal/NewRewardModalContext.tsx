@@ -21,7 +21,9 @@ export const ModalContext = createContext<IBaseModalDialogContext>({
   dismiss: () => 0,
 });
 
-export const ModalProvider: FC<IModalProvider> = ({ children }) => {
+export const ModalProvider: FC<IModalProvider> = ({
+  children,
+}): ReactElement => {
   const [visible, setVisible] = useState(false);
 
   const dismiss = useCallback(() => {
