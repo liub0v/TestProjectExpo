@@ -118,7 +118,6 @@ export const NewRewardModal: FC<INewRewardModalProps> = ({
                   itemStyle={[{ fontSize: 18, color: PRIMARY }]}
                   selectedValue={user}
                   prompt={"Colleagues"}
-                  onBlur={handleBlur("user")}
                   onValueChange={(itemValue) => {
                     setFieldValue("userId", itemValue);
                     setUser(itemValue);
@@ -140,9 +139,8 @@ export const NewRewardModal: FC<INewRewardModalProps> = ({
                     keyboardType='numeric'
                     placeholder='30$'
                     onChangeText={handleChange("reward")}
-                    onBlur={handleBlur("reward")}
                     value={values.reward}
-                    style={styles.messageInput}
+                    style={[styles.textInput, textColor]}
                   />
                   {errors.reward && touched.reward && (
                     <Text style={{ color: ERROR }}>{`${errors.reward}`}</Text>
@@ -154,9 +152,8 @@ export const NewRewardModal: FC<INewRewardModalProps> = ({
                     numberOfLines={3}
                     placeholder='Thank you for help!'
                     onChangeText={handleChange("message")}
-                    onBlur={handleBlur("message")}
                     value={values.message}
-                    style={styles.messageInput}
+                    style={[styles.textInput, textColor]}
                   />
                   {errors.message && touched.message && (
                     <Text style={{ color: ERROR }}>{`${errors.message}`}</Text>
@@ -211,7 +208,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginVertical: INDENT.S,
   },
-  messageInput: {
+  textInput: {
     marginTop: INDENT.M,
     height: 40,
     width: "100%",
