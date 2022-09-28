@@ -43,10 +43,9 @@ export const NewRewardModal: FC<INewRewardModalProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { tileBackgroundColor, textColor } = useStyles();
-
+  const { users } = useData();
   const [user, setUser] = useState(null);
   const { recievedValue } = useUser();
-  const { users } = useData();
 
   const validate = ({
     message,
@@ -67,7 +66,6 @@ export const NewRewardModal: FC<INewRewardModalProps> = ({
 
   const onSend = useCallback(
     ({ userId, message, reward }) => {
-      console.log(userId, message, reward);
       dispatch(
         addFeed({
           userId,
@@ -95,12 +93,15 @@ export const NewRewardModal: FC<INewRewardModalProps> = ({
         <View style={[styles.container, tileBackgroundColor]}>
           <Formik
             validate={validate}
-            initialValues={{ reward: null, userId: user, message: null }}
+            initialValues={{
+              reward: null,
+              userId: users[0]?.id,
+              message: null,
+            }}
             onSubmit={onSend}
           >
             {({
               handleChange,
-              handleBlur,
               handleSubmit,
               values,
               setFieldValue,
