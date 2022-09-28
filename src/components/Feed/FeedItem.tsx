@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { Feed } from "../../types";
@@ -9,11 +9,11 @@ interface IFeedItem {
   item: Feed;
 }
 
-export const FeedItem: FC<IFeedItem> = ({ item }) => {
+export const FeedItem: FC<IFeedItem> = ({ item }): ReactElement => {
   return <FeedItemContent item={item} />;
 };
 
-const FeedItemContent: FC<IFeedItem> = ({ item }) => {
+const FeedItemContent: FC<IFeedItem> = ({ item }): ReactElement => {
   const { textColor, tileBackgroundColor } = useStyles();
   const infoString = `${item.user.firstName} ${item.user.lastName} rewarded by ${item.author.firstName} ${item.author.lastName}`;
 
