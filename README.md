@@ -1,6 +1,6 @@
 # TestProjectExpo
 
-Check the project at: https://snack.expo.dev/@git/github.com/liub0v/TestProjectExpo@develop
+Check the project at: https://snack.expo.dev/@liubou.kurets/github.com-liub0v-testprojectexpo@develop
 
 ## General steps:
 
