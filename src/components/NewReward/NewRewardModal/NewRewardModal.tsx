@@ -1,0 +1,207 @@
+import React, { useCallback, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Button,
+} from "react-native";
+import Modal from "react-native-modal";
+import { useStyles } from "../../../hooks/useStyles";
+import {
+  DEVICE_WIDTH,
+  ERROR,
+  GRAY,
+  INDENT,
+  PRIMARY,
+} from "../../../utils/constants";
+import { Formik } from "formik";
+import { Picker } from "@react-native-picker/picker";
+import { useDispatch } from "react-redux";
+import { addFeed } from "../../../redux/dataSlice";
+import { useUser } from "../../../hooks/useUser";
+import { useData } from "../../../hooks/useData";
+
+interface IValidationErrors {
+  reward: string;
+  message: string;
+}
+
+export const NewRewardModal = ({ visible, onDismiss }) => {
+  const dispatch = useDispatch();
+  const { tileBackgroundColor, textColor } = useStyles();
+
+  const [user, setUser] = useState(null);
+  const { recievedValue } = useUser();
+  const { users } = useData();
+
+  const validate = ({ message, reward }): IValidationErrors => {
+    const errors = {} as IValidationErrors;
+    if (!reward) {
+      errors.reward = "Enter some value, please";
+    }
+    if (reward > recievedValue) {
+      errors.reward = "You don't have enough money";
+    }
+    if (!message || message.length === 0) {
+      errors.message = "Message cannot be empty";
+    }
+    return errors;
+  };
+
+  const onSend = useCallback(({ userId, message, reward }) => {
+    console.log(userId, message, reward);
+    dispatch(
+      addFeed({
+        userId,
+        message,
+        reward,
+      })
+    );
+    onDismiss();
+  }, []);
+
+  return (
+    <Modal
+      avoidKeyboard
+      deviceWidth={DEVICE_WIDTH}
+      isVisible={visible}
+      onDismiss={onDismiss}
+      onBackdropPress={onDismiss}
+      onBackButtonPress={onDismiss}
+      useNativeDriver={true}
+      style={styles.modal}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={[styles.container, tileBackgroundColor]}>
+          <Formik
+            validate={validate}
+            initialValues={{ reward: null, userId: user, message: null }}
+            onSubmit={onSend}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              setFieldValue,
+              errors,
+              touched,
+            }) => (
+              <View style={styles.formContainer}>
+                <Text
+                  style={[styles.title, { fontSize: INDENT.XL }, textColor]}
+                >
+                  {`Give reward to:`}
+                </Text>
+                <Picker
+                  style={{ width: "100%" }}
+                  itemStyle={[{ fontSize: 18, color: PRIMARY }]}
+                  selectedValue={user}
+                  prompt={"Colleagues"}
+                  onBlur={handleBlur("user")}
+                  onValueChange={(itemValue) => {
+                    setFieldValue("userId", itemValue);
+                    setUser(itemValue);
+                  }}
+                >
+                  {users.map((user) => {
+                    return (
+                      <Picker.Item
+                        key={user.id}
+                        label={`${user.firstName} ${user.lastName}`}
+                        value={user.id}
+                      />
+                    );
+                  })}
+                </Picker>
+                <View style={styles.inputWrapper}>
+                  <Text style={[styles.title, textColor]}>Reward</Text>
+                  <TextInput
+                    keyboardType='numeric'
+                    placeholder='30$'
+                    onChangeText={handleChange("reward")}
+                    onBlur={handleBlur("reward")}
+                    value={values.reward}
+                    style={styles.messageInput}
+                  />
+                  {errors.reward && touched.reward && (
+                    <Text style={{ color: ERROR }}>{`${errors.reward}`}</Text>
+                  )}
+                </View>
+                <View style={styles.inputWrapper}>
+                  <Text style={[styles.title, textColor]}>Message</Text>
+                  <TextInput
+                    numberOfLines={3}
+                    placeholder='Thank you for help!'
+                    onChangeText={handleChange("message")}
+                    onBlur={handleBlur("message")}
+                    value={values.message}
+                    style={styles.messageInput}
+                  />
+                  {errors.message && touched.message && (
+                    <Text style={{ color: ERROR }}>{`${errors.message}`}</Text>
+                  )}
+                </View>
+                <View style={styles.buttonsContainer}>
+                  <Button
+                    onPress={() => handleSubmit()}
+                    title='Submit'
+                    color={PRIMARY}
+                  ></Button>
+                </View>
+              </View>
+            )}
+          </Formik>
+        </View>
+      </TouchableWithoutFeedback>
+    </Modal>
+  );
+};
+const styles = StyleSheet.create({
+  modal: {
+    justifyContent: "flex-end",
+    alignItems: "center",
+    margin: 0,
+  },
+  container: {
+    minHeight: "60%",
+    width: DEVICE_WIDTH,
+    borderTopStartRadius: INDENT.L,
+    borderTopEndRadius: INDENT.L,
+    paddingTop: INDENT.XL,
+    paddingBottom: INDENT.L,
+    paddingHorizontal: INDENT.XL,
+  },
+  formContainer: {
+    alignItems: "center",
+  },
+  title: {
+    fontSize: INDENT.L,
+    fontWeight: "500",
+  },
+  inputWrapper: {
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: INDENT.S,
+  },
+  buttonsContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginVertical: INDENT.S,
+  },
+  messageInput: {
+    marginTop: INDENT.M,
+    height: 40,
+    width: "100%",
+    borderColor: GRAY,
+    borderWidth: 1,
+    minHeight: 40,
+    borderRadius: INDENT.S,
+    paddingHorizontal: INDENT.S,
+  },
+});
