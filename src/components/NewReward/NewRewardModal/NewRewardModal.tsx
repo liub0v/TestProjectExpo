@@ -28,29 +28,23 @@ interface IValidationErrors {
   reward: string;
   message: string;
 }
-interface IValidationProps {
+interface IValidation {
   reward: number;
   message: string;
 }
-interface INewRewardModalProps {
+interface INewRewardModal {
   visible: boolean;
   onDismiss: () => void;
 }
 
-export const NewRewardModal: FC<INewRewardModalProps> = ({
-  visible,
-  onDismiss,
-}) => {
+export const NewRewardModal: FC<INewRewardModal> = ({ visible, onDismiss }) => {
   const dispatch = useDispatch();
   const { tileBackgroundColor, textColor } = useStyles();
   const { users } = useData();
   const [user, setUser] = useState(null);
   const { recievedValue } = useUser();
 
-  const validate = ({
-    message,
-    reward,
-  }: IValidationProps): IValidationErrors => {
+  const validate = ({ message, reward }: IValidation): IValidationErrors => {
     const errors = {} as IValidationErrors;
     if (!reward) {
       errors.reward = "Enter some value, please";
