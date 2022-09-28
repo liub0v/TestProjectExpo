@@ -1,14 +1,19 @@
-import React from "react";
+import React, { FC } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { useStyles } from "../../hooks/useStyles";
 import { Feed } from "../../types";
 import { INDENT } from "../../utils/constants";
 import { dateParser } from "../../utils/helpers";
 
-export const FeedItem = ({ item }: { item: Feed }) => {
+interface IFeedItem {
+  item: Feed;
+}
+
+export const FeedItem: FC<IFeedItem> = ({ item }) => {
   return <FeedItemContent item={item} />;
 };
-const FeedItemContent = ({ item }: { item: Feed }) => {
+
+const FeedItemContent: FC<IFeedItem> = ({ item }) => {
   const { textColor, tileBackgroundColor } = useStyles();
   const infoString = `${item.user.firstName} ${item.user.lastName} rewarded by ${item.author.firstName} ${item.author.lastName}`;
 

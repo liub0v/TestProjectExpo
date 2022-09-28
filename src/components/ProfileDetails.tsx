@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useStyles } from "../hooks/useStyles";
 import { useUser } from "../hooks/useUser";
 import { INDENT, PRIMARY } from "../utils/constants";
 
-export const ProfileDetails = () => {
+export const ProfileDetails: FC = () => {
   const { user } = useUser();
   const { textColor, tileBackgroundColor } = useStyles();
 

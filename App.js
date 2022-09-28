@@ -1,3 +1,4 @@
+import { React } from "react";
 import { StyleSheet, View } from "react-native";
 import { Profile } from "./src/components/Profile";
 import { Provider } from "react-redux";

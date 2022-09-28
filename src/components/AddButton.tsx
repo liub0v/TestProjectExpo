@@ -1,3 +1,4 @@
+import { FC } from "react";
 import {
   View,
   StyleSheet,
@@ -8,7 +9,11 @@ import { useStyles } from "../hooks/useStyles";
 import { useTheme } from "../hooks/useTheme";
 import { INDENT, PLUS_ICON, PLUS_ICON_DARK } from "../utils/constants";
 
-export const AddButton = ({ onPress }) => {
+interface IAddButton {
+  onPress: () => void;
+}
+
+export const AddButton: FC<IAddButton> = ({ onPress }) => {
   const { isDarkMode } = useTheme();
   const { backgroundColor } = useStyles();
   return (
