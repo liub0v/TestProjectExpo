@@ -1,19 +1,19 @@
 # TestProjectExpo
 
-Check the project at: https://snack.expo.dev/@liubou.kurets/fbd849
+Check the project at: https://snack.expo.dev/@git/github.com/liub0v/TestProjectExpo@develop
 
 ## General steps:
 
 - clone repository into your local directory with `git clone https://github.com/liub0v/TestProjectExpo.git`
-- run `yarn install` inside [`project root`](../)
+- run `yarn install` inside `project root`
 
 ## Android Emulator:
 
-- run `yarn run android` inside [`project root`](../)
+- run `yarn run android` inside `project root`
 
 ## IOS simulator:
 
-- run `yarn run ios` inside [`project root`](../)
+- run `yarn run ios` inside `project root`
 
 ## On device:
 
