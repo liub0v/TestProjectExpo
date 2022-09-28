@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: INDENT.M,
     borderRadius: INDENT.L,
-    padding: INDENT.M,
-    flex: 3,
+    paddingHorizontal: INDENT.M,
+    flex: 4,
   },
   headerTabContainer: {
     flexDirection: "column",

@@ -30,4 +30,5 @@ export const INDENT = {
   M: 12,
   L: 16,
   XL: 24,
+  XXL: 32,
 };

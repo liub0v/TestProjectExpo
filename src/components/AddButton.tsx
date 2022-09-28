@@ -4,13 +4,15 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useStyles } from "../hooks/useStyles";
 import { useTheme } from "../hooks/useTheme";
 import { INDENT, PLUS_ICON, PLUS_ICON_DARK } from "../utils/constants";
 
 export const AddButton = ({ onPress }) => {
   const { isDarkMode } = useTheme();
+  const { backgroundColor } = useStyles();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, backgroundColor]}>
       <TouchableWithoutFeedback onPress={onPress}>
         <Image
           style={styles.button}
@@ -25,16 +27,18 @@ export const AddButton = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
+    position: "absolute",
+    height: "9%",
+    aspectRatio: 1,
+    borderRadius: 50,
+    bottom: INDENT.XL,
+    right: INDENT.XXL,
+    backgroundColor: "white",
     justifyContent: "center",
-    alignItems: "flex-end",
-    borderRadius: INDENT.L,
-    height: "10%",
-    marginVertical: INDENT.S,
-    marginHorizontal: INDENT.M,
+    alignItems: "center",
   },
   button: {
     height: "50%",
     aspectRatio: 1,
-    marginRight: INDENT.XL,
   },
 });
